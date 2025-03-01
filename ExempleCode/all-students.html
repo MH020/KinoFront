@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Students</title>
+</head>
+<body>
+    <h1>All Students Page</h1>
+
+    <form>
+        <label for="name">Student Name:</label>
+        <input type="text" id="name" name="name" required>
+        <br><br>
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required>
+        <br><br>
+
+        <p>Active Status:</p>
+        <input type="radio" id="activeTrue" name="active" value="true" checked>
+        <label for="activeTrue">True</label>
+        <input type="radio" id="activeFalse" name="active" value="false">
+        <label for="activeFalse">False</label>
+
+        <button id="btnCreate" type="button">Create new student</button>
+    </form>
+    <script src="all-students.js"></script>
+</body>
+</html>
