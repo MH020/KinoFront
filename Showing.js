@@ -1,5 +1,5 @@
-const url = "http://localhost:8080";
-//const url = "http://rigtig-url";
+//const url = "http://localhost:8080";
+const url = "http://52.169.6.120";
 
 fetch(`${url}/showing/all`)
     .then(response => {
