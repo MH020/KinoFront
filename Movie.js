@@ -1,4 +1,12 @@
 
+
+const movieButton = document.querySelector("#addMovieButton");
+
+
+
+
+
+
 function addMovie(movie) {
     const div = document.querySelector("#movie-list");
 
