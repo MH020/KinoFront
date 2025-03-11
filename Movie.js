@@ -1,8 +1,23 @@
-
+const url = "http://localhost:8080";
 
 const movieButton = document.querySelector("#addMovieButton");
 
 
+
+fetch(`${url}/movie/all`)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("FEJL NUMBNUTS");
+        }
+        return response.json();
+    })
+    .then(movies => {
+        console.log(movies);
+        displayMovieText(movies);
+    })
+    .catch(err => {
+        console.error("Der opstod en fejl:", err);
+    });
 
 
 
