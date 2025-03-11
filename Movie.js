@@ -7,7 +7,7 @@ movieButton.addEventListener("click", () => {
 });
 
 function fetchActors() {
-    fetch(`${url}/actors/all`)
+    fetch(`${url}/actor/all`)
         .then(response => {
             return response.json();
         })
@@ -15,16 +15,18 @@ function fetchActors() {
         .then(json => console.log(json));
 }
 function populateActors(actors) {
-    const actorList = document.querySelector("#actor-list");
+    const actorList = document.querySelector("#actorDropdown");
     actors.forEach(actor => {
         const option  = document.createElement("option");
-        option.value = actor.id;
-        option.innerText = actor.name;
+        //option.value = actor.id;
+        option.innerText = actor.fullName;
+            console.log(actor)
         actorList.appendChild(option);
     });
     console.log(actors);
 }
-function addMovie(movie) {
+// den her laver html'en
+function addMovie() {
     const div = document.querySelector("#movie-list");
 
     const movieForm = document.createElement("div");
@@ -39,7 +41,7 @@ function addMovie(movie) {
     <input type="number" id="releaseYear" name="releaseYear" required><br>
     
     <label for="duration">Duration:</label>
-    <input type="number" id="duration" name="duration" required><br>
+    <input type="time" id="duration" name="duration" required><br>
     
     <label for="ageRestriction">Age Restriction:</label>
     <input type="number" id="ageRestriction" name="ageRestriction" required><br>
@@ -75,7 +77,7 @@ function addMovie(movie) {
         const data = { title, releaseYear, duration, ageRestriction, description, genre, director, actors: selectedActors };
         console.log(data);
 
-        fetch(`${url}/movies/add`, {
+        fetch(`${url}/movie/add`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
