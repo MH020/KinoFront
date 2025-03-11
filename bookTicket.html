@@ -2,11 +2,45 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <title>Book ticket/s</title>
 </head>
 <body>
 
+<!-- create reservation -->
+<div class="container mt-4">
+  <h2>Booking</h2>
+  <form id="booking-form">
 
+    <div class="form-group">
+      <label for="movie">Movie:</label>
+      <input type="text" class="form-control" id="movie" name="movie" disabled>
+    </div>
+
+    <div class="form-group">
+      <label for="time">Time:</label>
+      <input type="time" class="form-control" id="time" name="time" disabled>
+    </div>
+
+    <div class="form-group">
+      <label for="duration">Duration:</label>
+      <input type="time" class="form-control" id="duration" name="duration" disabled>
+    </div>
+
+    <div class="form-group">
+      <label for="theatre">Theatre:</label>
+      <input type="text" class="form-control" id="theatre" name="theatre" disabled>
+    </div>
+
+    <div class="form-group">
+      <label for="phoneNumber">Phone Number:</label>
+      <input type="number" class="form-control" id="phoneNumber" name="phoneNumber" required>
+    </div>
+
+    <br>
+    <button type="button" class="btn btn-primary" id="book-button">Book</button>
+  </form>
+  <br>
+</div>
 
 </body>
 <script src="bookTicket.js"></script>
