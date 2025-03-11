@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie List</title>
+</head>
+<body>
+<div id="showing-list"></div>
+
+<header>
+  <!-- search showings -->
+  <div class="search-wrapper">
+    <label for="showing-search" ></label>
+    <input type="search" id="showing-search" placeholder="search showings...">
+  </div><!-- end of search shwoings. -->
+</header>
+
+<!-- showing data -->
+<h2>Date</h2>
+<div>
+  <h3> <a href="movie.html">Title (link til film) </a> </h3> <!-- navigation to movie page -->
+  <p>Theatre</p>
+  <p>Time</p>
+  <p>Duration</p>
+  <p> tickets left (399/400)</p>
+
+  <!-- search tickets belonging to phonenumber -->
+  <div class="search-wrapper">
+    <label for="ticket-search" > search tickets</label>
+    <input type="search" id="ticket-search" placeholder="phonenumber...">
+    <p> search tickets</p>
+    <button id="search-tickets-button"> search</button>
+  </div> <!-- end of search tickets -->
+
+</div> <!-- end of showing card. -->
+
+<!-- modal showing tickets bought -->
+<div id="customer-tickets-modal">
+  <p> tickets bought </p>
+  <button id="close-button"> close </button>
+</div>
+
+<!-- scripts -->
+<script src="Showing.js"></script>
+<script src="Alert.js"></script>
+
+</body>
+</html>
