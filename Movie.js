@@ -1,55 +1,96 @@
 const url = "http://localhost:8080";
 
 const movieButton = document.querySelector("#addMovieButton");
+movieButton.addEventListener("click", () => {
+    addMovie();
+    fetchActors();
+});
 
-
-
-fetch(`${url}/movie/all`)
-    .then(response => {
-        if (!response.ok) {
-            throw new Error("FEJL NUMBNUTS");
-        }
-        return response.json();
-    })
-    .then(movies => {
-        console.log(movies);
-        displayMovieText(movies);
-    })
-    .catch(err => {
-        console.error("Der opstod en fejl:", err);
+function fetchActors() {
+    fetch(`${url}/actors/all`)
+        .then(response => {
+            return response.json();
+        })
+        .then(actors => populateActors(actors))
+        .then(json => console.log(json));
+}
+function populateActors(actors) {
+    const actorList = document.querySelector("#actor-list");
+    actors.forEach(actor => {
+        const option  = document.createElement("option");
+        option.value = actor.id;
+        option.innerText = actor.name;
+        actorList.appendChild(option);
     });
-
-
-
-
+    console.log(actors);
+}
 function addMovie(movie) {
     const div = document.querySelector("#movie-list");
 
-    const addMovie = document.createElement("div");
-    movieinfo.classList.add("addMovie");
+    const movieForm = document.createElement("div");
+    movieForm.classList.add("addMovie");
 
-    addMovie.innerHTML = `
+    movieForm.innerHTML = `
     <h2>Add Movie</h2>
     <label for="title">Title:</label>
-    <input type="text" id="title" name="title" value="${movie.title || ''}"><br>
-
-    <label for="releaseYear">Udgivelsesår:</label>
-    <input type="number" id="releaseYear" name="releaseYear" value="${movie.releaseYear || ''}"><br>
-
-    <label for="duration">Varighed:</label>
-    <input type="text" id="duration" name="duration" value="${movie.duration || ''}"><br>
-
-    <label for="ageRestriction">Aldersgrænse:</label>
-    <input type="text" id="ageRestriction" name="ageRestriction" value="${movie.ageRestriction || ''}"><br>
-
-    <label for="description">Beskrivelse:</label>
-    <textarea id="description" name="description">${movie.description || ''}</textarea><br>
-
+    <input type="text" id="title" name="title" required><br>
+    
+    <label for="releaseYear">Release Year:</label>
+    <input type="number" id="releaseYear" name="releaseYear" required><br>
+    
+    <label for="duration">Duration:</label>
+    <input type="number" id="duration" name="duration" required><br>
+    
+    <label for="ageRestriction">Age Restriction:</label>
+    <input type="number" id="ageRestriction" name="ageRestriction" required><br>
+    
+    <label for="description">Description:</label>
+    <input type="text" id="description" name="description" required><br>
+    
     <label for="genre">Genre:</label>
-    <input type="text" id="genre" name="genre" value="${movie.genre || ''}"><br>
-
-    <label for="director">Diraktør:</label>
-    <input type="text" id="director" name="director" value="${movie.director || ''}"><br>
+    <input type="text" id="genre" name="genre" required><br>
+    
+    <label for="director">Director:</label>
+    <input type="text" id="director" name="director" required><br>
+    
+     <label for="actorDropdown">Actors:</label>
+     <select id="actorDropdown" name="actors" multiple required></select><br>
+    
+    <button id="saveMovieButton">Gem</button>
     `;
-    div.append(movieinfo);
+    div.append(movieForm);
+
+    const saveMovieButton = document.querySelector("#saveMovieButton");
+    saveMovieButton.addEventListener("click", () => {
+        const title = document.querySelector("#title").value;
+        const releaseYear = document.querySelector("#releaseYear").value;
+        const duration = document.querySelector("#duration").value;
+        const ageRestriction = document.querySelector("#ageRestriction").value;
+        const description = document.querySelector("#description").value;
+        const genre = document.querySelector("#genre").value;
+        const director = document.querySelector("#director").value;
+        const actorDropdown = document.querySelector("#actorDropdown");
+        const selectedActors = Array.from(actorDropdown.selectedOptions).map(option => option.value);
+
+        const data = { title, releaseYear, duration, ageRestriction, description, genre, director, actors: selectedActors };
+        console.log(data);
+
+        fetch(`${url}/movies/add`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept':'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => response.json())
+            .then(result => {
+                console.log('Response Success:', result);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
 }
+
+
