@@ -5,14 +5,13 @@ ticketButton.addEventListener("click", () => {
     bookTicket();
 });
 
-// den her laver html'en
 function bookTicket() {
     const ticketList = document.querySelector("#ticket-list"); //get div(movieList) form html.
 
     const bookingForm = document.createElement("div"); //create new div.
     bookingForm.classList.add("bookTicket");
 
-    //
+    // html
     bookingForm.innerHTML = `
         <h2>Book Ticket</h2>
       <label for="movie">Movie:</label>
@@ -70,31 +69,45 @@ function bookTicket() {
     });
 }
 
-//for each movie in movies, add a new moviecard, and add movie info.
-function displayTicketText(tickets) {
-    if (!tickets) {
-        console.warn("Ingen film fundet.");
+// fetch en bestemt showing
+function fetchShowing() {
+    fetch(`${url}/showing/show`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("FEJL NUMBNUTS");
+            }
+            return response.json();
+        })
+        .then(movies => {
+            console.log(movies);
+            displayTicketText(movies);
+        })
+        .catch(err => {
+            console.error("error:", err);
+        });
+}
+fetchShowing();
+
+function displayShowingText(showing) {
+    if (!showing) {
+        console.warn("Ingen showings fundet.");
         return;
     }
 
-    //get movieList
-    const ticketList = document.querySelector("#ticket-list");
+    //get showingList
+    const showingList = document.querySelector("#showing-list");
 
-    tickets.forEach(ticket => { //for each movie in movie
-        const ticketInfo = document.createElement("div"); //create new div containing movie info
-        ticketInfo.classList.add("movie-info");
+    showing.forEach(showing => { //for each movie in movie
+        const showingInfo = document.createElement("div"); //create new div containing movie info
+        showingInfo.classList.add("ticket-info");
 
-        //movie info on html
-        ticketInfo.innerHTML = `
-            <h2>${movie.title}</h2>
-            <p><strong>Udgivelsesår: </strong> ${movie.releaseYear}</p>
-            <p><strong>Varighed: </strong> ${movie.duration}</p>
-            <p><strong>Beskrivelse: </strong> ${movie.description}</p>
-            <label><strong>Genre: </strong> ${movie.genre}</label>
-            <label><strong>Instruktør: </strong> ${movie.director}</label>
-            <label><strong>Aldersgrænse: </strong> ${movie.ageRestriction}</label>
-            <label><strong>Skuespillere: </strong> ${movie.actorString}</label>
+        showingInfo.innerHTML = `
+            <h2>${showing.movie}</h2>
+            <p><strong>Date</strong> ${showing.date}</p>
+            <p><strong>Time</strong> ${showing.time}</p>
+            <p><strong>Duration</strong> ${showing.duration}</p>
+            <p><strong>Theatre</strong> ${showing.theatre}</p>
         `;
-        ticketList.append(ticketInfo);
+        showingList.append(showingInfo);
     }); //end of for eac loop.
 }
