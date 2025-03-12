@@ -1,3 +1,30 @@
 .hide{
     display: none;
 }
+
+div{
+    margin: 5px;
+    padding: 5px;
+}
+
+.modal {
+    /*display: none;*/
+   /* margin: auto ;*/
+   position: fixed;
+    /* align-items: center; */
+
+    border: darkslategray solid 1px;
+    /* code taken from catfacts : */
+    top: 25%;
+    left: 25%;
+    width: 50%;
+    height: 30%;
+    background-color: lightgray; /* rgba(0, 0, 0, 0.5);*/
+    z-index: 1000;
+}
+
+.showing-card {
+    border: 1px solid black;
+    /*border-width: 4px; */
+
+}
