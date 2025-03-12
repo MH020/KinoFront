@@ -44,5 +44,5 @@ function displayTicket(tickets) {
 
 //getting movie information for the booking form
 function fetchMovieInfo(){
-    
+
 }
