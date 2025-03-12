@@ -87,9 +87,12 @@ function addMovie() {
         const genre = document.querySelector("#genre").value;
         const director = document.querySelector("#director").value;
 
+        //get values from actor dropdown.
+        const actorDropdown = document.querySelector("#actorDropdown");
+        const selectedActors = Array.from(actorDropdown.selectedOptions).map(option => option.value);
 
         //moviedata from html arranged in an array.
-        const movieData = { title, releaseYear, duration, ageRestriction, description, genre, director};
+        const movieData = { title, releaseYear, duration, ageRestriction, description, genre, director, actors: selectedActors };
         console.log(movieData);
 
         //post movie object from html form.
@@ -152,7 +155,7 @@ function displayMovieText(movies) {
             <p><strong>Beskrivelse: </strong> ${movie.description}</p>
         `;
 
-        movieList.append(movieInfo); //add movie info to movielist.
+        movieList.append(movieinfo); //add movie info to movielist.
     }); //end of for eac loop.
 
 }
