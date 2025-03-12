@@ -3,30 +3,9 @@ const movieButton = document.querySelector("#add-movie-button");
 
 movieButton.addEventListener("click", () => {
     addMovie();
-    fetchActors();
 });
 
-//get actor
-function fetchActors() {
-    fetch(`${url}/actor/all`)//fetch all actors
-        .then(response => {
-            return response.json(); //get as json
-        })
-        .then(actors => populateActors(actors)) //add actors to html.
-        .then(json => console.log(json)); //log json data.
-}
 
-function populateActors(actors) {
-    const actorList = document.querySelector("#actorDropdown"); //get actor drop down
-    actors.forEach(actor => {
-        const option  = document.createElement("option"); //create option object.
-        //option.value = actor.id;
-        option.innerText = actor.fullName; //set optiontext as actor name.
-            console.log(actor) //log actor.
-        actorList.appendChild(option); //add optionelement to actorList (html)
-    });
-    console.log(actors); //log actors again?
-}
 // den her laver html'en
 function addMovie() {
     const movieList = document.querySelector("#movie-list"); //get div(movieList) form html.
@@ -66,8 +45,8 @@ function addMovie() {
         <input type="text" id="director" name="director" required><br>
         
         <!-- set actors -->
-         <label for="actorDropdown">Actors:</label>
-         <select id="actorDropdown" name="actors" multiple required></select><br>
+        <label for="actors">Actors</label>
+        <input type="text" id="actors" name="actors" required><br>
         
         <!-- submit button -->
         <button id="saveMovieButton">Gem</button>
@@ -86,10 +65,11 @@ function addMovie() {
         const description = document.querySelector("#description").value;
         const genre = document.querySelector("#genre").value;
         const director = document.querySelector("#director").value;
+        const actorString = document.querySelector("#actors").value;
 
 
         //moviedata from html arranged in an array.
-        const movieData = { title, releaseYear, duration, ageRestriction, description, genre, director};
+        const movieData = { title, releaseYear, duration, ageRestriction, description, genre, director,actorString };
         console.log(movieData);
 
         //post movie object from html form.
@@ -150,6 +130,11 @@ function displayMovieText(movies) {
             <p><strong>Udgivelsesår: </strong> ${movie.releaseYear}</p>
             <p><strong>Varighed: </strong> ${movie.duration}</p>
             <p><strong>Beskrivelse: </strong> ${movie.description}</p>
+            <label><strong>Genre: </strong> ${movie.genre}</label>
+            <label><strong>Instruktør: </strong> ${movie.director}</label>
+            <label><strong>Aldersgrænse: </strong> ${movie.ageRestriction}</label>
+            <label><strong>Skuespillere: </strong> ${movie.actorString}</label>
+            
         `;
 
         movieList.append(movieInfo); //add movie info to movielist.
