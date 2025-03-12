@@ -12,3 +12,5 @@ closeTicketsModalButton.addEventListener("click", ()=>{
     customerTicketsModal.style.display= "none";
 });
 
+
+
