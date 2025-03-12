@@ -41,3 +41,8 @@ function displayTicket(tickets) {
         div.append(ticketInfo);
     })
 }
+
+//getting movie information for the booking form
+function fetchMovieInfo(){
+    
+}
