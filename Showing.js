@@ -69,7 +69,7 @@ function displayMovieText(showing) {
         showingListDiv.append(showingCard);
 
         const button = document.querySelector(`#search-${showing.id}-tickets-button`);
-        displayModalButtonListener(showing, button, ticketSearchInput);
+        displayModalButtonListener(showing, button);
     });
 
 
@@ -92,6 +92,7 @@ function addSearchTicketBar(showingId, htmlElement){
     const searchBarButton = document.createElement("button");
     searchBarButton.id = `search-${showingId}-tickets-button`; //"search-tickets-button";
     searchBarButton.innerText = "search";
+    searchBarButton.type = "submit";
     searchTicketsButtonList.push(searchBarButton); //add button to list, so we can add eventlisteners later.
 
 
@@ -146,12 +147,12 @@ const ticketModalText = document.querySelector("#ticket-modal-text");
 ticketModalText.innerText = "Hello World!";
 
 //display modal
-function displayModalButtonListener(showing, button, ) {
+function displayModalButtonListener(showing, button) {
     button.addEventListener("click", (e) => {
-            userInput = e.target.value;
+            const phoneNumber = e.target.value;
             customerTicketsModal.style.display = "inline-block";
-            const customerTickets = fetchTicketsByPhoneNumber(showing, userInput);
-            console.log(userInput);
+            const customerTickets = fetchTicketsByPhoneNumber(showing, phoneNumber);
+            console.log(phoneNumber);
             ticketModalText.innerText = customerTickets + "ticket(s) for " + showing.name;
 
     });
