@@ -69,7 +69,7 @@ function displayMovieText(showing) {
         showingListDiv.append(showingCard);
 
         const button = document.querySelector(`#search-${showing.id}-tickets-button`);
-        displayModalButtonListener(showing, button);
+        displayModalButtonListener(showing, button, ticketSearchInput);
     });
 
 
@@ -119,7 +119,6 @@ function createDateCards(showing){
     }
 }
 
-
 function fetchTicketsByPhoneNumber(showing, phoneNumber){
     fetch(`${url}/showing/${showing.id}/phoneNumber/${phoneNumber}`)
         .then(response => {
@@ -134,11 +133,8 @@ function fetchTicketsByPhoneNumber(showing, phoneNumber){
     });
 }
 
+
 function getSearchBarInput(searchBarInput){
-
-}
-
-function displayTicketsByPhoneNumber(searchBarInput, showing){
     searchBarInput.addEventListener("input", (e) => {
         const userInput = e.target.value;
         console.log(userInput)
@@ -150,11 +146,12 @@ const ticketModalText = document.querySelector("#ticket-modal-text");
 ticketModalText.innerText = "Hello World!";
 
 //display modal
-function displayModalButtonListener(showing, button) {
-    button.addEventListener("click", () => {
+function displayModalButtonListener(showing, button, ) {
+    button.addEventListener("click", (e) => {
+            userInput = e.target.value;
             customerTicketsModal.style.display = "inline-block";
             const customerTickets = fetchTicketsByPhoneNumber(showing, userInput);
-
+            console.log(userInput);
             ticketModalText.innerText = customerTickets + "ticket(s) for " + showing.name;
 
     });
