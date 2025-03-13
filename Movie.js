@@ -1,6 +1,7 @@
 const url = "http://localhost:8080";
 //const url = "http://rigtig-url";
 
+
 fetch(`${url}/movie/all`)
     .then(response => {
         if (!response.ok) {
@@ -15,6 +16,7 @@ fetch(`${url}/movie/all`)
     .catch(err => {
         console.error("Der opstod en fejl:", err);
     });
+
 
 function displayMovieText(movies) {
     if (!movies) {
