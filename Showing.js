@@ -4,8 +4,8 @@ const body = document.querySelector("body");
 //showingList
 const showingListDiv = document.querySelector("#showing-list");
 
-
 //addSearchBar("search-showings-button", body); //addSearchBar to body with buttonId seargh-tickets-button.
+const showingSearchBar = document.querySelector("input");//"#showing-search");
 
 //fetch all showings
 fetch(`${url}/showing/all`)
@@ -22,6 +22,8 @@ fetch(`${url}/showing/all`)
     .catch(err => { //error handling
         console.error("Der opstod en fejl:", err);
     });
+
+getSearchBarInput(showingSearchBar);
 
 function displayMovieText(showing) {
     if (!showing) { //error handling
@@ -48,33 +50,36 @@ function displayMovieText(showing) {
             <p><strong>Beskrivelse:</strong> ${showing.movie.description}</p> -->
             <p><strong>Biograf:</strong> Teater #${showing.theatre.id}</p>
             <p><strong>Ledige sæder:</strong> ${showing.theatre.seats}</p>`;
-        addSearchBar(`search-ticket-for-showing-${showing.id}`, showingCard); //add search bar to showingCard.
+
+        addSearchTicketBar(showing.id, showingCard); //add search bar to showingCard.
+       // getSearchBarInput(document.querySelector("#ticket-search-" + showing.id));
         showingListDiv.append(showingCard);
     });
 }
 
-function addSearchBar(buttonId, htmlElement){
+function addSearchTicketBar(showingId, htmlElement){
     const searchBarDiv = document.createElement("div");
     searchBarDiv.classList.add("search-wrapper");
 
     //add label and input to searchbarDiv.
     searchBarDiv.innerHTML = `
-        <label for="ticket-search" > search tickets</label>
-        <input type="search" id="ticket-search" placeholder="phonenumber..."> `;
+        <label for="ticket-search-${showingId}" > search tickets</label>
+        <input type="search" id="ticket-search-${showingId}" placeholder="phonenumber...">` ;
 
     //create and add button to search bar.
     const searchBarButton = document.createElement("button");
-    searchBarButton.id = buttonId; //"search-tickets-button";
+    searchBarButton.id = `search-showing-${showingId}-tickets-button`; //"search-tickets-button";
     searchBarButton.innerText = "search";
     searchBarDiv.append(searchBarButton);
 
-    //add searchbar to html body.
+    //add searchbar to ShowingCard.
     htmlElement.append(searchBarDiv);
+    //searchTicketList.push(searchBarDiv);
 }
 
 function createDateCards(showing){
-    let dateCard = document.querySelector(`#date-card-${showing.date}`);
-    if (dateCard == null){
+    let dateCard = document.querySelector(`#date-card-${showing.date}`); //get datecard with date of showing.
+    if (dateCard == null){ //if datecard doesn't exist, create new.
         dateCard = document.createElement("div")
         dateCard.id =`date-card-${showing.date}`
 
@@ -83,6 +88,29 @@ function createDateCards(showing){
         dateCard.append(dateCardText);
         showingListDiv.append(dateCard);
     }
+}
+
+
+function fetchTicketsByPhoneNumber(showing, phoneNumber){
+    fetch(`${url}/showing/${showing.id}/phoneNumber/${phoneNumber}`)
+        .then(response => {
+            if (!response.ok){
+                console.log("error in fetchTicketsByPhoneNumber")
+            }
+            return response.json();
+
+        }).then(data => {
+            console.log(data.value);
+            return data.value;
+    });
+}
+
+function getSearchBarInput(searchBarInput){
+    searchBarInput.addEventListener("search", (e) => {
+        const userInput = e.target.value;
+        console.log(e.target.value);
+        //return e.target.value;
+    });
 }
 
 //const ticketSearchBarInput = document.querySelector("#ticket-search");
