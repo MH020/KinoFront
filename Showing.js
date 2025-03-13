@@ -10,6 +10,8 @@ const showingSearchBar = document.querySelector("input");//"#showing-search");
 //fetch all showings
 fetch(`${url}/showing/all`)
     .then(response => { //error handling.
+        const azureUrl = "https://kinobackapp-exhffhcdf8ekcaa3.northeurope-01.azurewebsites.net"
+
         if (!response.ok) {
             throw new Error("FEJL NUMBNUTS");
         }
