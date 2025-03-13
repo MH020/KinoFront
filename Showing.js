@@ -5,12 +5,12 @@ const body = document.querySelector("body");
 const showingListDiv = document.querySelector("#showing-list");
 
 //addSearchBar("search-showings-button", body); //addSearchBar to body with buttonId seargh-tickets-button.
-const showingSearchBar = document.querySelector("input");//"#showing-search");
+const showingSearchBar = document.querySelector("#showing-search-input");//"#showing-search");
 
 //fetch all showings
 fetch(`${url}/showing/all`)
     .then(response => { //error handling.
-        const azureUrl = "https://kinobackapp-exhffhcdf8ekcaa3.northeurope-01.azurewebsites.net"
+        //const azureUrl = "https://kinobackapp-exhffhcdf8ekcaa3.northeurope-01.azurewebsites.net"
 
         if (!response.ok) {
             throw new Error("FEJL NUMBNUTS");
@@ -65,8 +65,8 @@ function addSearchTicketBar(showingId, htmlElement){
 
     //add label and input to searchbarDiv.
     searchBarDiv.innerHTML = `
-        <label for="ticket-search-${showingId}" > search tickets</label>
-        <input type="search" id="ticket-search-${showingId}" placeholder="phonenumber...">` ;
+        <label id="ticket-search-${showingId}-label" > search tickets</label>
+        <input type="search" id="ticket-search-${showingId}-input" placeholder="phonenumber...">` ;
 
     //create and add button to search bar.
     const searchBarButton = document.createElement("button");
@@ -108,12 +108,46 @@ function fetchTicketsByPhoneNumber(showing, phoneNumber){
 }
 
 function getSearchBarInput(searchBarInput){
-    searchBarInput.addEventListener("search", (e) => {
+    searchBarInput.addEventListener("input", (e) => {
         const userInput = e.target.value;
-        console.log(e.target.value);
+        console.log(userInput);
         //return e.target.value;
     });
 }
+
+/*
+function testSearchBar(){
+    const searchWrapper = document.createElement("div");
+    searchWrapper.id = "search-wrapper";
+    body.append(searchWrapper);
+
+    const searchBar = document.createElement("div");
+    searchBar.id = "search-bar";
+
+    const searchLabel = document.createElement("label");
+    searchLabel.id = "search-label";
+    searchLabel.for = "search-input";
+    searchLabel.innerText = "Search?";
+    searchBar.append(searchLabel);
+
+    const searchInput = document.createElement("input");
+    searchInput.type = "search"; //type
+    searchInput.id = "search-input";
+    searchInput.placeholder ="...";
+    searchBar.append(searchInput);
+
+    const searchButton = document.createElement("button");
+    searchButton.id= "search-button";
+    searchButton.innerText = "Search"
+    searchBar.append(searchButton);
+
+    searchWrapper.append(searchBar);
+    body.append(body);
+
+
+    getSearchBarInput()
+
+}*/
 
 //const ticketSearchBarInput = document.querySelector("#ticket-search");
 
