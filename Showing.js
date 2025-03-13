@@ -53,30 +53,47 @@ function displayMovieText(showing) {
             <p><strong>Biograf:</strong> Teater #${showing.theatre.id}</p>
             <p><strong>Ledige sæder:</strong> ${showing.theatre.seats}</p>`;
 
-        addSearchTicketBar(showing.id, showingCard); //add search bar to showingCard.
-       // getSearchBarInput(document.querySelector("#ticket-search-" + showing.id));
+        const ticketSearchInput = addSearchTicketBar(showing.id, showingCard); //add search bar to showingCard.
+        console.log(showing.id);
+
+        //const ticketSearchInput = document.querySelector("#ticket-search-" + showing.id) ;
+        getSearchBarInput(ticketSearchInput);
         showingListDiv.append(showingCard);
+
     });
 }
 
 function addSearchTicketBar(showingId, htmlElement){
     const searchBarDiv = document.createElement("div");
     searchBarDiv.classList.add("search-wrapper");
-
+/*
     //add label and input to searchbarDiv.
     searchBarDiv.innerHTML = `
-        <label id="ticket-search-${showingId}-label" > search tickets</label>
-        <input type="search" id="ticket-search-${showingId}-input" placeholder="phonenumber...">` ;
+        <label for="ticket-search" > search tickets</label>
+        <input type="search" id="ticket-search" placeholder="phonenumber...">` ;
+*/
+    //create label and input for search bar
+    const searchBarLabel = document.createElement("label");
+    searchBarLabel.for="ticket-search";
+    const searchBarInput = document.createElement("input");
+    searchBarInput.id = "ticket-search";
+    searchBarInput.type = "search";
+    searchBarInput.placeholder = "phonenumber...";
 
     //create and add button to search bar.
     const searchBarButton = document.createElement("button");
-    searchBarButton.id = `search-showing-${showingId}-tickets-button`; //"search-tickets-button";
+    searchBarButton.id = `search-${showingId}-tickets-button`; //"search-tickets-button";
     searchBarButton.innerText = "search";
+
+    //add label, input and button to searchBarDiv
+    searchBarDiv.append(searchBarLabel);
+    searchBarDiv.append(searchBarInput);
     searchBarDiv.append(searchBarButton);
 
     //add searchbar to ShowingCard.
     htmlElement.append(searchBarDiv);
-    //searchTicketList.push(searchBarDiv);
+
+    return searchBarInput;
 }
 
 function createDateCards(showing){
@@ -110,44 +127,10 @@ function fetchTicketsByPhoneNumber(showing, phoneNumber){
 function getSearchBarInput(searchBarInput){
     searchBarInput.addEventListener("input", (e) => {
         const userInput = e.target.value;
+        //let isVisible =
         console.log(userInput);
         //return e.target.value;
     });
 }
 
-/*
-function testSearchBar(){
-    const searchWrapper = document.createElement("div");
-    searchWrapper.id = "search-wrapper";
-    body.append(searchWrapper);
-
-    const searchBar = document.createElement("div");
-    searchBar.id = "search-bar";
-
-    const searchLabel = document.createElement("label");
-    searchLabel.id = "search-label";
-    searchLabel.for = "search-input";
-    searchLabel.innerText = "Search?";
-    searchBar.append(searchLabel);
-
-    const searchInput = document.createElement("input");
-    searchInput.type = "search"; //type
-    searchInput.id = "search-input";
-    searchInput.placeholder ="...";
-    searchBar.append(searchInput);
-
-    const searchButton = document.createElement("button");
-    searchButton.id= "search-button";
-    searchButton.innerText = "Search"
-    searchBar.append(searchButton);
-
-    searchWrapper.append(searchBar);
-    body.append(body);
-
-
-    getSearchBarInput()
-
-}*/
-
-//const ticketSearchBarInput = document.querySelector("#ticket-search");
 
