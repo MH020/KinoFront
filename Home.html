@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie List</title>
+    <title>Home</title>
 
     <!-- Google Fonts for Styling -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Open+Sans:wght@600&display=swap">
@@ -14,11 +14,13 @@
     <a href="Home.html">Home</a>
     <a href="Movie.html">Movies</a>
     <a href="Showing.html">Showings</a>
-    <button onclick="goBack()" >Back</button>
 </div>
-    <div id="movie-list" class="content">
-    </div>
-    <script src="Movie.js"></script>
-    <script src="utils.js"></script>
-    </body>
+<div class="content">
+    <h1>Welcome to the Movie App</h1>
+    <p>Use the buttons below to explore movies and showings</p>
+    <button onclick="navigateToMovies()">Explore Movies</button>
+    <button onclick="navigateToShowings()">Explore Showings</button>
+</div>
+<script src="home.js"></script>
+</body>
 </html>
