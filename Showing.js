@@ -1,7 +1,9 @@
 const url = "http://localhost:8080";
 const azureUrl = "https://kinobackapp-exhffhcdf8ekcaa3.northeurope-01.azurewebsites.net"
 
-fetch(`${url}/showing/all`)
+
+
+fetch(`${azureUrl}/showing/all`)
     .then(response => {
         if (!response.ok) {
             throw new Error("FEJL NUMBNUTS");

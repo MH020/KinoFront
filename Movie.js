@@ -5,7 +5,7 @@ const azureUrl = "https://kinobackapp-exhffhcdf8ekcaa3.northeurope-01.azurewebsi
 const movieButton = document.querySelector("#add-movie-button");
 
 
-fetch(`${url}/movie/all`)
+fetch(`${azureUrl}/movie/all`)
     .then(response => {
         if (!response.ok) {
             throw new Error("FEJL NUMBNUTS");
@@ -22,7 +22,7 @@ fetch(`${url}/movie/all`)
 
 
 function fetchAllMovies() {
-    fetch(`${url}/movie/all`)
+    fetch(`${azureUrl}/movie/all`)
 
         .then(response => {
             if (!response.ok) {
@@ -42,7 +42,6 @@ function fetchAllMovies() {
 fetchAllMovies();
 
 //for each movie in movies, add a new moviecard, and add movie info.
-
 function displayMovieText(movies) {
     if (!movies) {
         console.warn("Ingen film fundet.");
