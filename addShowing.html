@@ -4,28 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>add Showing</title>
+    <link rel="stylesheet" href="style.css" >
+    <style>
+        #popupForm {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid #ccc;
+            padding: 20px;
+            background-color: white;
+            z-index: 1000;
+        }
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+    </style>
 </head>
 <body>
-<div id="showing-list"></div>
-
-    <h1>Opret en ny showing</h1>
-    <form id="showingForm">
-      <label for="time">Tid:</label>
-      <input type="time" id="time" name="time" required>
-      <br>
-      <label for="date">Date:</label>
-      <input type="date" id="date" name="date" required>
-      <br>
-      <label for="movieId">Movie id:</label>
-      <input type="number" id="movieId" name="movieId" required>
-      <br>
-      <label for="theatreId">Theatre id:</label>
-      <input type="number" id="theatreId" name="theatreId" required>
-      <br>
-      <button type="submit">Opret</button>
-    </form>
-
     <button id="create-showing-form-button"> ny visning </button>
+    <div id="overlay"></div>
+    <div id="popupForm"></div>
+    <div id="showing-list"></div>
 </body>
 <script src="addShowing.js"></script>
 <script src="Showing.js"></script>
