@@ -5,17 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Movie List</title>
   <link rel="stylesheet" href="style.css" >
+    <!-- Google Fonts for Styling -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Open+Sans:wght@600&display=swap">
+
 </head>
 <body>
 
+<div class="nav">
+    <a href="index.html">Home</a>
+    <a href="Movie.html">Movies</a>
+    <a href="Showing.html">Showings</a>
+    <button onclick="goBack()" >Back</button>
 
-<header>
   <!-- search showings -->
   <div class="search-wrapper">
     <label id="showing-search-label" ></label>
     <input type="search" id="showing-search-input" placeholder="search showings...">
   </div><!-- end of search shwoings. -->
-</header>
+</div>
 
 <div id="showing-list"></div>
 
@@ -41,6 +48,7 @@
 <!-- scripts -->
 <script src="Showing.js"></script>
 <script src="Ticket.js"></script>
+<script src="utils.js"></script>
 
 </body>
 </html>
