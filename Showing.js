@@ -32,16 +32,16 @@ function displayMovieText(showing) {
         showingInfo.classList.add("showingInfo");
 
         showingInfo.innerHTML = `
-            <h2>Film: ${showing.movie.title}</h2>
-            <p><strong>Dato:</strong> ${showing.date}</p>
-            <p><strong>Tid:</strong> ${showing.time}</p>
-            <p><strong>Varighed:</strong> ${showing.movie.duration}</p>
-            <p><strong>Aldersgrænse:</strong> ${showing.movie.ageRestriction}+</p>
-            <p><strong>Instruktør:</strong> ${showing.movie.director}</p>
+            <h2>Movie: ${showing.movie.title}</h2>
+            <p><strong>Date:</strong> ${showing.date}</p>
+            <p><strong>Time:</strong> ${showing.time}</p>
+            <p><strong>Duration:</strong> ${showing.movie.duration}</p>
+            <p><strong>Age restriction:</strong> ${showing.movie.ageRestriction}+</p>
+            <p><strong>Director:</strong> ${showing.movie.director}</p>
             <p><strong>Genre ID:</strong> ${showing.movie.genre}</p>
-            <p><strong>Beskrivelse:</strong> ${showing.movie.description}</p>
-            <p><strong>Biograf:</strong> Teater #${showing.theatre.id}</p>
-            <p><strong>Ledige sæder:</strong> ${showing.theatre.seats}</p>
+            <p><strong>Description:</strong> ${showing.movie.description}</p>
+            <p><strong>Cinema:</strong> Teater #${showing.theatre.id}</p>
+            <p><strong>Seats available:</strong> ${showing.theatre.seats}</p>
             <input type="search" id="phoneNumber" placeholder="Phone number...">
             <button id="saveTicketButton"> Book ticket</button>
             <hr>
@@ -52,7 +52,6 @@ function displayMovieText(showing) {
 }
 
 //TICKETS
-
 document.querySelectorAll(".saveTicketButton").forEach(button => {
     button.addEventListener("click", (event) => {
         const showing = event.target.dataset.showing; // Get showing ID from button data attribute
