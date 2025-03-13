@@ -1,8 +1,16 @@
 const url = "http://localhost:8080";
-const ticketButton = document.querySelector("#book-ticket-button");
 
-ticketButton.addEventListener("click", () => {
-    bookTicket();
+document.addEventListener("DOMContentLoaded", () => {
+    const ticketButton = document.querySelector("#book-ticket-button");
+
+    if (!ticketButton) {
+        console.error("Element with ID 'book-ticket-button' not found.");
+        return;
+    }
+
+    ticketButton.addEventListener("click", () => {
+        bookTicket();
+    });
 });
 
 function bookTicket() {
@@ -71,7 +79,7 @@ function bookTicket() {
 
 // fetch en bestemt showing
 function fetchShowing() {
-    fetch(`${url}/showing/show`)
+    fetch(`${url}/showing/all`)
         .then(response => {
             if (!response.ok) {
                 throw new Error("FEJL NUMBNUTS");
@@ -80,7 +88,7 @@ function fetchShowing() {
         })
         .then(movies => {
             console.log(movies);
-            displayTicketText(movies);
+            displayShowingText(movies);
         })
         .catch(err => {
             console.error("error:", err);
@@ -102,11 +110,12 @@ function displayShowingText(showing) {
         showingInfo.classList.add("ticket-info");
 
         showingInfo.innerHTML = `
-            <h2>${showing.movie}</h2>
+            <h2>${showing.movie.title}</h2>
+            <hidden><p>${showing.id}</p></hidden>
             <p><strong>Date</strong> ${showing.date}</p>
             <p><strong>Time</strong> ${showing.time}</p>
-            <p><strong>Duration</strong> ${showing.duration}</p>
-            <p><strong>Theatre</strong> ${showing.theatre}</p>
+            <p><strong>Duration</strong> ${showing.movie.duration}</p>
+            <p><strong>Theatre</strong> ${showing.theatre.id}</p>
         `;
         showingList.append(showingInfo);
     }); //end of for eac loop.
