@@ -1,5 +1,5 @@
 const url = "http://localhost:8080";
-const azureUrl = "https://kinobackapp-exhffhcdf8ekcaa3.northeurope-01.azurewebsites.net";
+//const azureUrl = "https://kinobackapp-exhffhcdf8ekcaa3.northeurope-01.azurewebsites.net";
 
 // Fetch showings data
 fetch(`${url}/showing/all`)

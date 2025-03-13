@@ -87,3 +87,7 @@ button:hover {
 .movieinfo p, .showingInfo p {
     margin: 5px 0;
 }
+
+.hide{
+    display: none;
+}
