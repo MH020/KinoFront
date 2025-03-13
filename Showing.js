@@ -68,9 +68,11 @@ function displayMovieText(showing) {
         getSearchBarInput(ticketSearchInput);
         showingListDiv.append(showingCard);
 
+        const button = document.querySelector(`#search-${showing.id}-tickets-button`);
+        displayModalButtonListener(showing, button);
     });
 
-    displayModalButtonListeners();
+
 }
 
 //add html for ticket searchbar.
@@ -144,15 +146,17 @@ function displayTicketsByPhoneNumber(searchBarInput, showing){
     });
 }
 
+const ticketModalText = document.querySelector("#ticket-modal-text");
+ticketModalText.innerText = "Hello World!";
 
 //display modal
-function displayModalButtonListeners() {
-    searchTicketsButtonList.forEach(button => {
-        button.addEventListener("click", () => {
+function displayModalButtonListener(showing, button) {
+    button.addEventListener("click", () => {
             customerTicketsModal.style.display = "inline-block";
             const customerTickets = fetchTicketsByPhoneNumber(showing, userInput);
-            customerTicketsModal.innerText = customerTickets + "ticket(s) for " + showing.name;
-        });
+
+            ticketModalText.innerText = customerTickets + "ticket(s) for " + showing.name;
+
     });
 }
 
