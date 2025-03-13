@@ -1,5 +1,9 @@
 const url = "http://localhost:8080";
-//const url = "http://rigtig-url";
+const azureUrl = "https://kinobackapp-exhffhcdf8ekcaa3.northeurope-01.azurewebsites.net"
+
+
+const movieButton = document.querySelector("#add-movie-button");
+
 
 fetch(`${url}/movie/all`)
     .then(response => {
@@ -15,6 +19,29 @@ fetch(`${url}/movie/all`)
     .catch(err => {
         console.error("Der opstod en fejl:", err);
     });
+
+
+function fetchAllMovies() {
+    fetch(`${url}/movie/all`)
+
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("FEJL NUMBNUTS");
+            }
+            return response.json();
+        })
+        .then(movies => {
+            console.log(movies);
+            displayMovieText(movies);
+        })
+        .catch(err => {
+            console.error("Der opstod en fejl:", err);
+        });
+}
+
+fetchAllMovies();
+
+//for each movie in movies, add a new moviecard, and add movie info.
 
 function displayMovieText(movies) {
     if (!movies) {
