@@ -5,6 +5,8 @@ const body = document.querySelector("body");
 const showingListDiv = document.querySelector("#showing-list");
 
 
+//addSearchBar("search-showings-button", body); //addSearchBar to body with buttonId seargh-tickets-button.
+
 //fetch all showings
 fetch(`${url}/showing/all`)
     .then(response => { //error handling.
@@ -26,27 +28,28 @@ function displayMovieText(showing) {
         console.warn("Ingen film fundet.");
         return;
     }
+
     //for each showing, add showing and movie attributes
     showing.forEach(showing => {
-        const showingInfo = document.createElement("div");
-        showingInfo.classList.add("showingInfo");
+        createDateCards(showing);
 
-        showingInfo.innerHTML = `
-            <hidden> ${showing.id} </hidden> <!-- showing id -->
-            <!-- <h2>Film: ${showing.movie.title}</h2> -->
-            <p><strong>Date:</strong> ${showing.date}</p>
+        const showingCard = document.createElement("div");
+        showingCard.classList.add("showing-card");
+
+        showingCard.innerHTML = `
+            <!-- <hidden> ${showing.id} </hidden> showing id -->
+            <a href="movie.html" > <h2>Film: ${showing.movie.title}</h2> </a>
+           <!--  <p><strong>Date:</strong> ${showing.date}</p> -->
             <p><strong>Tid:</strong> ${showing.time}</p>
-            <p><strong>Varighed:</strong> ${showing.movie.duration}</p>
+          <!--   <p><strong>Varighed:</strong> ${showing.movie.duration}</p> -->
             <p><strong>Aldersgrænse:</strong> ${showing.movie.ageRestriction}+</p>
-            <p><strong>Instruktør:</strong> ${showing.movie.director}</p>
+          <!--  <p><strong>Instruktør:</strong> ${showing.movie.director}</p> 
             <p><strong>Genre ID:</strong> ${showing.movie.genre}</p>
-            <p><strong>Beskrivelse:</strong> ${showing.movie.description}</p>
+            <p><strong>Beskrivelse:</strong> ${showing.movie.description}</p> -->
             <p><strong>Biograf:</strong> Teater #${showing.theatre.id}</p>
-            <p><strong>Ledige sæder:</strong> ${showing.theatre.seats}</p>
-            <hr>
-        `;
-        addSearchBar(`search-ticket-for-showing-${showing.id}`, showingInfo);
-        showingListDiv.append(showingInfo);
+            <p><strong>Ledige sæder:</strong> ${showing.theatre.seats}</p>`;
+        addSearchBar(`search-ticket-for-showing-${showing.id}`, showingCard); //add search bar to showingCard.
+        showingListDiv.append(showingCard);
     });
 }
 
@@ -69,6 +72,18 @@ function addSearchBar(buttonId, htmlElement){
     htmlElement.append(searchBarDiv);
 }
 
-addSearchBar("search-showings-button", body); //addSearchBar to body with buttonId seargh-tickets-button.
+function createDateCards(showing){
+    let dateCard = document.querySelector(`#date-card-${showing.date}`);
+    if (dateCard == null){
+        dateCard = document.createElement("div")
+        dateCard.id =`date-card-${showing.date}`
 
+        const dateCardText = document.createElement("h3");
+        dateCardText.innerText = showing.date;
+        dateCard.append(dateCardText);
+        showingListDiv.append(dateCard);
+    }
+}
+
+//const ticketSearchBarInput = document.querySelector("#ticket-search");
 

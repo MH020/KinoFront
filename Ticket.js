@@ -1,4 +1,4 @@
-const searchTicketsButton = document.querySelector("#search-tickets-button");
+const searchTicketsButton = document.querySelector("search-ticket-for-showing-1");
 const customerTicketsModal = document.querySelector("#customer-tickets-modal");
 const closeTicketsModalButton = document.querySelector("#close-tickets-modal-button");
 

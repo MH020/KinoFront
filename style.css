@@ -5,6 +5,7 @@
 div{
     margin: 5px;
     padding: 5px;
+    border: black solid 1px;
 }
 
 .modal {
