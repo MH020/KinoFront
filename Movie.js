@@ -23,7 +23,7 @@ function displayMovieText(movies) {
         console.warn("Ingen film fundet.");
         return;
     }
-    
+
     const div = document.querySelector("#movie-list");
 
 
@@ -39,6 +39,7 @@ function displayMovieText(movies) {
         `;
 
         div.append(movieinfo);
-    })
+    });
 
 }
+
