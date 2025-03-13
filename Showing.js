@@ -7,6 +7,12 @@ const showingListDiv = document.querySelector("#showing-list");
 //addSearchBar("search-showings-button", body); //addSearchBar to body with buttonId seargh-tickets-button.
 const showingSearchBar = document.querySelector("#showing-search-input");//"#showing-search");
 
+//ticket modal
+const customerTicketsModal = document.querySelector("#customer-tickets-modal");
+const closeTicketsModalButton = document.querySelector("#close-tickets-modal-button");
+const searchTicketsButtonList = [];
+
+
 //fetch all showings
 fetch(`${url}/showing/all`)
     .then(response => { //error handling.
@@ -26,6 +32,8 @@ fetch(`${url}/showing/all`)
     });
 
 getSearchBarInput(showingSearchBar);
+
+
 
 function displayMovieText(showing) {
     if (!showing) { //error handling
@@ -61,17 +69,15 @@ function displayMovieText(showing) {
         showingListDiv.append(showingCard);
 
     });
+
+    displayModalButtonListeners();
 }
 
+//add html for ticket searchbar.
 function addSearchTicketBar(showingId, htmlElement){
     const searchBarDiv = document.createElement("div");
     searchBarDiv.classList.add("search-wrapper");
-/*
-    //add label and input to searchbarDiv.
-    searchBarDiv.innerHTML = `
-        <label for="ticket-search" > search tickets</label>
-        <input type="search" id="ticket-search" placeholder="phonenumber...">` ;
-*/
+
     //create label and input for search bar
     const searchBarLabel = document.createElement("label");
     searchBarLabel.for="ticket-search";
@@ -84,6 +90,8 @@ function addSearchTicketBar(showingId, htmlElement){
     const searchBarButton = document.createElement("button");
     searchBarButton.id = `search-${showingId}-tickets-button`; //"search-tickets-button";
     searchBarButton.innerText = "search";
+    searchTicketsButtonList.push(searchBarButton); //add button to list, so we can add eventlisteners later.
+
 
     //add label, input and button to searchBarDiv
     searchBarDiv.append(searchBarLabel);
@@ -125,12 +133,31 @@ function fetchTicketsByPhoneNumber(showing, phoneNumber){
 }
 
 function getSearchBarInput(searchBarInput){
+
+}
+
+function displayTicketsByPhoneNumber(searchBarInput, showing){
     searchBarInput.addEventListener("input", (e) => {
         const userInput = e.target.value;
-        //let isVisible =
-        console.log(userInput);
-        //return e.target.value;
+        console.log(userInput)
+        return userInput;
     });
 }
 
+
+//display modal
+function displayModalButtonListeners() {
+    searchTicketsButtonList.forEach(button => {
+        button.addEventListener("click", () => {
+            customerTicketsModal.style.display = "inline-block";
+            const customerTickets = fetchTicketsByPhoneNumber(showing, userInput);
+            customerTicketsModal.innerText = customerTickets + "ticket(s) for " + showing.name;
+        });
+    });
+}
+
+//close modal
+closeTicketsModalButton.addEventListener("click", ()=>{
+    customerTicketsModal.style.display= "none";
+});
 
