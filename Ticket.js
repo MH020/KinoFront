@@ -1,4 +1,4 @@
-const url = "http://localhost:8080";
+//const url = "http://localhost:8080";
 
 document.addEventListener("DOMContentLoaded", () => {
     const ticketButton = document.querySelector("#book-ticket-button");
@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("Element with ID 'book-ticket-button' not found.");
         return;
     }
-
+    
     ticketButton.addEventListener("click", () => {
         bookTicket();
     });
@@ -22,26 +22,10 @@ function bookTicket() {
     // html
     bookingForm.innerHTML = `
         <h2>Book Ticket</h2>
-      <label for="movie">Movie:</label>
-      <input type="text" class="form-control" id="movie" name="movie" disabled>
-
-      <label for="date">Date:</label>
-      <input type="date" class="form-control" id="date" name="date" disabled>
-
-      <label for="time">Time:</label>
-      <input type="time" class="form-control" id="time" name="time" disabled>
-
-      <label for="duration">Duration:</label>
-      <input type="time" class="form-control" id="duration" name="duration" disabled>
-
-      <label for="theatre">Theatre:</label>
-      <input type="text" class="form-control" id="theatre" name="theatre" disabled>
-
       <label for="phoneNumber">Phone Number:</label>
       <input type="number" class="form-control" id="phoneNumber" name="phoneNumber" required>
-        
         <!-- submit button -->
-    <button type="button" class="btn btn-primary" id="book-button">Book</button>
+    <button type="button" class="btn btn-primary" id="book-ticket-button">Save booking</button>
     `;
     //end of html.
 
@@ -111,11 +95,11 @@ function displayShowingText(showing) {
 
         showingInfo.innerHTML = `
             <h2>${showing.movie.title}</h2>
-            <hidden><p>${showing.id}</p></hidden>
-            <p><strong>Date</strong> ${showing.date}</p>
-            <p><strong>Time</strong> ${showing.time}</p>
-            <p><strong>Duration</strong> ${showing.movie.duration}</p>
-            <p><strong>Theatre</strong> ${showing.theatre.id}</p>
+            <p class="hide"> ${showing.id}</p>
+            <p><strong>Date:</strong> ${showing.date}</p>
+            <p><strong>Time:</strong> ${showing.time}</p>
+            <p><strong>Duration:</strong> ${showing.movie.duration}</p>
+            <p><strong>Theatre:</strong> ${showing.theatre.id}</p>
         `;
         showingList.append(showingInfo);
     }); //end of for eac loop.
