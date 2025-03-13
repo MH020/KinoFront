@@ -5,22 +5,6 @@ const azureUrl = "https://kinobackapp-exhffhcdf8ekcaa3.northeurope-01.azurewebsi
 const movieButton = document.querySelector("#add-movie-button");
 
 
-fetch(`${azureUrl}/movie/all`)
-    .then(response => {
-        if (!response.ok) {
-            throw new Error("FEJL NUMBNUTS");
-        }
-        return response.json();
-    })
-    .then(movies => {
-        console.log(movies);
-        displayMovieText(movies);
-    })
-    .catch(err => {
-        console.error("Der opstod en fejl:", err);
-    });
-
-
 function fetchAllMovies() {
     fetch(`${azureUrl}/movie/all`)
 
