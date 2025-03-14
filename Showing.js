@@ -68,9 +68,12 @@ function displayMovieText(showing) {
         getSearchBarInput(ticketSearchInput);
         showingListDiv.append(showingCard);
 
-        const button = document.querySelector(`#search-${showing.id}-tickets-button`);
-        button.type = "submit";
-        modalButtonListener(showing, button);
+        const submitButton = document.querySelector(`#search-${showing.id}-tickets-button`);
+        //submitButton.type = "submit";
+
+        console.log("før modalButtonListener");
+        modalButtonListener(showing, submitButton);
+        console.log("efter modalButtonListenre");
     });
 
 
@@ -122,18 +125,19 @@ function createDateCards(showing){
 }
 
 function fetchTicketsByPhoneNumber(showing, phoneNumber){
-    console.log("phoneNumber: " + phoneNumber);
+    console.log("fetch phoneNumber: " + phoneNumber);
 
     fetch(`${url}/showing/${showing.id}/tickets/${phoneNumber}`)
         .then(response => {
             if (!response.ok){
                 console.log("error in fetchTicketsByPhoneNumber")
             }
+            console.log ("response OK");
             return response.json();
 
         }).then(data => {
-            console.log(data.value);
-            return data.value;
+            console.log("tickets for phoneNumber: "  + data);
+            return data;
     }).catch((error) => console.log("fejl i fetchTicketsByPhoneNumber: " + error));
 }
 
@@ -152,6 +156,7 @@ ticketModalText.innerText = "Hello World!";
 //display modal
 function modalButtonListener(showing, button) {
     button.addEventListener("click", (e) => {
+        console.log("start modal Listener")
            /* const phoneNumberInput = document.querySelector(`#ticket-search-${showing.id}`);
             const phoneNumber = e.target.value;
             const eTarget = e.target;
@@ -168,6 +173,7 @@ function modalButtonListener(showing, button) {
 
             //console.log("button: " + button + "\nphoneNumberInput: " + phoneNumberInput + "\ne.target: " + eTarget + "\nphoneNumber: " + phoneNumber + "\nTickets bought: " + customerTickets);
 
+        console.log("slut modalListener");
     });
 }
 
