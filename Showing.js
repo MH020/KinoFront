@@ -16,24 +16,20 @@ let phoneNumber = 0;
 
 //fetch all showings
 fetch(`${url}/showing/all`)
-    .then(response => { //error handling.
-        //const azureUrl = "https://kinobackapp-exhffhcdf8ekcaa3.northeurope-01.azurewebsites.net"
-
-        if (!response.ok) {
-            throw new Error("FEJL NUMBNUTS");
-        }
-        return response.json(); //return json object.
-    })
-    .then(showing => { //display showing on page
+    //const azureUrl = "https://kinobackapp-exhffhcdf8ekcaa3.northeurope-01.azurewebsites.net"
+.then(response => {
+    if (!response.ok) {
+        throw new Error("FEJL NUMBNUTS");
+    }
+    return response.json(); //return json object.
+}).then(showing => { //display showing on page
         console.log(showing);
         displayMovieText(showing);
-    })
-    .catch(err => { //error handling
+}).catch(err => { //error handling
         console.error("Der opstod en fejl:", err);
-    });
+});
 
 getSearchBarInput(showingSearchBar);
-
 
 
 function displayMovieText(showing) {
@@ -42,14 +38,14 @@ function displayMovieText(showing) {
         return;
     }
 
-    //for each showing, add showing and movie attributes
+            //for each showing, add showing and movie attributes
     showing.forEach(showing => {
-        createDateCards(showing);
+    createDateCards(showing);
 
-        const showingCard = document.createElement("div");
-        showingCard.classList.add("showing-card");
+    const showingCard = document.createElement("div");
+    showingCard.classList.add("showing-card");
 
-        showingCard.innerHTML = `
+    showingCard.innerHTML = `
             <!-- <hidden> ${showing.id} </hidden> showing id -->
             <a href="movie.html" > <h2>Film: ${showing.movie.title}</h2> </a>
            <!--  <p><strong>Date:</strong> ${showing.date}</p> -->
@@ -62,23 +58,21 @@ function displayMovieText(showing) {
             <p><strong>Biograf:</strong> Teater #${showing.theatre.id}</p>
             <p><strong>Ledige sæder:</strong> ${showing.theatre.seats}</p>`;
 
-        const ticketSearchInput = addSearchTicketBar(showing.id, showingCard); //add search bar to showingCard.
-        const submitButton = document.querySelector(`#search-${showing.id}-tickets-button`);
+    const ticketSearchInput = addSearchTicketBar(showing.id, showingCard); //add search bar to showingCard.
+    const submitButton = document.querySelector(`#search-${showing.id}-tickets-button`);
 
-        showingListDiv.append(showingCard);
+    showingListDiv.append(showingCard);
     });
-
-
 }
 
 //add html for ticket searchbar.
-function addSearchTicketBar(showingId, htmlElement){
+function addSearchTicketBar(showingId, htmlElement) {
     const searchBarDiv = document.createElement("div");
     searchBarDiv.classList.add("search-wrapper");
 
     //create label and input for search bar
     const searchBarLabel = document.createElement("label");
-    searchBarLabel.for=`ticket-search-${showingId}`;
+    searchBarLabel.for = `ticket-search-${showingId}`;
     const searchBarInput = document.createElement("input");
     searchBarInput.id = `ticket-search-${showingId}`;
     searchBarInput.type = "search";
@@ -102,11 +96,11 @@ function addSearchTicketBar(showingId, htmlElement){
     return searchBarInput;
 }
 
-function createDateCards(showing){
+function createDateCards(showing) {
     let dateCard = document.querySelector(`#date-card-${showing.date}`); //get datecard with date of showing.
-    if (dateCard == null){ //if datecard doesn't exist, create new.
+    if (dateCard == null) { //if datecard doesn't exist, create new.
         dateCard = document.createElement("div")
-        dateCard.id =`date-card-${showing.date}`
+        dateCard.id = `date-card-${showing.date}`
 
         const dateCardText = document.createElement("h3");
         dateCardText.innerText = showing.date;
@@ -115,24 +109,24 @@ function createDateCards(showing){
     }
 }
 
-function fetchTicketsByPhoneNumber(showing, phoneNumber){
+function fetchTicketsByPhoneNumber(showing, phoneNumber) {
     console.log("fetch phoneNumber: " + phoneNumber);
 
     fetch(`${url}/showing/${showing.id}/tickets/${phoneNumber}`)
-        .then(response => {
-            if (!response.ok){
-                console.log("error in fetchTicketsByPhoneNumber")
-            }
-            console.log ("response OK");
-            return response.json();
+    .then(response => {
+        if (!response.ok) {
+            console.log("error in fetchTicketsByPhoneNumber")
+        }
+        console.log("response OK");
+        return response.json();
 
-        }).then(data => {
-            console.log("tickets for phoneNumber: "  + data);
-            return data;
+    }).then(data => {
+        console.log("tickets for phoneNumber: " + data);
+        return data;
     }).catch((error) => console.log("fejl i fetchTicketsByPhoneNumber: " + error));
 }
 
-function getSearchBarInput(searchBarInput){
+function getSearchBarInput(searchBarInput) {
     searchBarInput.addEventListener("input", (e) => {
         const userInput = e.target.value;
         console.log(userInput)
@@ -147,7 +141,7 @@ ticketModalText.innerText = "Hello World!";
 function modalButtonListener(showing, button, searchBar) {
     button.addEventListener("click", () => {
         customerTicketsModal.style.display = "inline-block";
-        
+
         const customerTickets = fetchTicketsByPhoneNumber(showing, phoneNumber);
         ticketModalText.innerText = customerTickets + "ticket(s) for " + showing.name;
 
@@ -155,7 +149,87 @@ function modalButtonListener(showing, button, searchBar) {
 }
 
 //close modal
-closeTicketsModalButton.addEventListener("click", ()=>{
-    customerTicketsModal.style.display= "none";
+closeTicketsModalButton.addEventListener("click", () => {
+    customerTicketsModal.style.display = "none";
 });
+
+/* Creation Showing */
+
+//_______________create a showing________________
+document.getElementById('create-showing-form-button').addEventListener('click', function () {
+            const popupForm = document.getElementById('popupForm');
+            const overlay = document.getElementById('overlay');
+
+            popupForm.innerHTML = `
+        <form id="showingForm">
+            <label for="time">Tid:</label>
+            <input type="time" id="time" name="time" required><br>
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required><br>
+            <label for="movieId">Movie:</label>
+            <input type="number" id="movieId" name="movieId" required><br>
+            <label for="theatreId">Theatre:</label>
+            <input type="number" id="theatreId" name="theatreId" required><br>
+            <button type="submit">Opret</button>
+            <button type="button" id="closePopup">Luk</button>
+        </form>
+    `;
+
+            popupForm.style.display = 'block';
+            overlay.style.display = 'block';
+
+            document.getElementById('closePopup').addEventListener('click', function () {
+                popupForm.style.display = 'none';
+                overlay.style.display = 'none';
+            });
+
+            document.getElementById('showingForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                const timeInput = document.getElementById('time').value;
+                const date = document.getElementById('date').value;
+                const movieId = document.getElementById('movieId').value;
+                const theatreId = document.getElementById('theatreId').value;
+
+                const time = timeInput ? `${timeInput}:00` : '';
+                if (!timeInput) {
+                    alert('Tid skal være i formatet HH:MM');
+                    return;
+                }
+
+                const data = {
+                    time: time,
+                    date: date,
+                    movie: {id: movieId},
+                    theatre: {id: theatreId}
+                };
+
+                fetch(`${url}/showing/create`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            return response.json();
+                        } else {
+                            throw new Error('Noget gik galt med anmodningen');
+                        }
+                    })
+                    .then(data => {
+                        console.log('Succes:', data);
+                        alert('Showing oprettet succesfuldt!');
+                        popupForm.style.display = 'none';
+                        overlay.style.display = 'none';
+                    })
+                    .catch((error) => {
+                        console.error('Fejl:', error);
+                        alert('Fejl ved oprettelse af showing');
+                    });//end of catch
+            });//end of document.get showingForm. eventelistener
+});  //end of document.get createshowingform button
+
+
 

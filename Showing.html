@@ -6,10 +6,13 @@
   <title>Movie List</title>
   <link rel="stylesheet" href="style.css" >
     <!-- Google Fonts for Styling -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Open+Sans:wght@600&display=swap">
-
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Open+Sans:wght@600&display=swap">
 </head>
 <body>
+<!-- Creation Showing -->
+<button id="create-showing-form-button"> ny visning </button>
+<div id="overlay"></div>
+<div id="popupForm"></div>
 
 <div class="nav">
     <a href="index.html">Home</a>
@@ -28,7 +31,7 @@
 
 <!--
 -- showing data -
-<h2>Date</h2>
+<h2>Date</h2> -->
 
 <div class="showing-card">
   <h3> <a href="movie.html">Title (link til film) </a> </h3> <-- navigation to movie page
@@ -37,15 +40,22 @@
   <p>Duration</p>
   <p> tickets left (399/400)</p>
 
-</div> <-- end of showing card. -->
+  <!-- search tickets belonging to phonenumber -->
+  <div class="search-wrapper">
+    <label for="ticket-search" > search tickets</label>
+    <input type="search" id="ticket-search" placeholder="phonenumber...">
+    <p> search tickets</p>
+    <button id="search-tickets-button"> search</button>
+  </div> <!-- end of search tickets -->
+
+</div> <!-- end of showing card. -->
 
 <!-- modal showing tickets bought -->
-<div id="customer-tickets-modal" class="modal" style="display: none">
-  <p id="ticket-modal-text">  </p>
-  <button id="close-tickets-modal-button"> close </button>
+<div id="customer-tickets-modal">
+  <p> tickets bought </p>
+  <button id="close-button"> close </button>
 </div>
 
-<!-- scripts -->
 <script src="Showing.js"></script>
 <script src="Ticket.js"></script>
 <script src="utils.js"></script>
