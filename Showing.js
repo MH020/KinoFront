@@ -125,4 +125,3 @@ document.getElementById('create-showing-form-button').addEventListener('click', 
             });
     });
 });
-
