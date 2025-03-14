@@ -1,13 +1,14 @@
 const searchTicketsButton = document.querySelector("#search-tickets-button");
 const customerTicketsModal = document.querySelector("#customer-tickets-modal");
-const closeButton = document.querySelector("#close-button");
+const closeTicketsModalButton = document.querySelector("#close-tickets-modal-button");
 
-customerTicketsModal.style.display = "none";
-
+//display modal
 searchTicketsButton.addEventListener("click", ()=>{
-    customerTicketsModal.style.display = "inline";
+    customerTicketsModal.style.display = "inline-block";
 });
 
-closeButton.addEventListener("click", ()=>{
+//close modal
+closeTicketsModalButton.addEventListener("click", ()=>{
     customerTicketsModal.style.display= "none";
-})
+});
+
