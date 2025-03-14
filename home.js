@@ -1,7 +1,7 @@
 function navigateToMovies() {
-    window.location.href = "movie.html";
+    window.location.href = "Movie.html";
 }
 
 function navigateToShowings() {
-    window.location.href = "showing.html";
+    window.location.href = "Showing.html";
 }
