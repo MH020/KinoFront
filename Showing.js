@@ -65,15 +65,16 @@ function displayMovieText(showing) {
         console.log(showing.id);
 
         //const ticketSearchInput = document.querySelector("#ticket-search-" + showing.id) ;
-        getSearchBarInput(ticketSearchInput);
+        //getSearchBarInput(ticketSearchInput);
+
         showingListDiv.append(showingCard);
 
         const submitButton = document.querySelector(`#search-${showing.id}-tickets-button`);
         //submitButton.type = "submit";
 
-        console.log("før modalButtonListener");
-        modalButtonListener(showing, submitButton);
-        console.log("efter modalButtonListenre");
+        //  console.log("før modalButtonListener");
+        modalButtonListener(showing, submitButton, ticketSearchInput);
+        // console.log("efter modalButtonListenre");
     });
 
 
@@ -98,7 +99,6 @@ function addSearchTicketBar(showingId, htmlElement){
     searchBarButton.innerText = "search";
     searchBarButton.type = "submit";
     searchTicketsButtonList.push(searchBarButton); //add button to list, so we can add eventlisteners later.
-
 
     //add label, input and button to searchBarDiv
     searchBarDiv.append(searchBarLabel);
@@ -154,29 +154,30 @@ const ticketModalText = document.querySelector("#ticket-modal-text");
 ticketModalText.innerText = "Hello World!";
 
 //display modal
-function modalButtonListener(showing, button) {
-    button.addEventListener("click", (e) => {
-        console.log("start modal Listener")
-           /* const phoneNumberInput = document.querySelector(`#ticket-search-${showing.id}`);
-            const phoneNumber = e.target.value;
-            const eTarget = e.target;
+function modalButtonListener(showing, button, searchBar) {
+    const phoneNumber = getSearchBarInput(searchBar);
 
-        //target.value;
-            console.log("phoneNumber from searchBar: " + phoneNumber);
-            document.createElement("p"); //debug.
-*/
-            customerTicketsModal.style.display = "inline-block";
-
-            const customerTickets = fetchTicketsByPhoneNumber(showing, "12345678");
-            ticketModalText.innerText = customerTickets + "ticket(s) for " + showing.name;
-
-
-            //console.log("button: " + button + "\nphoneNumberInput: " + phoneNumberInput + "\ne.target: " + eTarget + "\nphoneNumber: " + phoneNumber + "\nTickets bought: " + customerTickets);
-
-        console.log("slut modalListener");
-    });
+    button.addEventListener("click", displayModal(phoneNumber, showing));
 }
 
+function displayModal(phoneNumber, showing){
+    console.log("display modal");
+    //console.log("search bar: " + searchBar);
+    console.log (phoneNumber);
+    console.log("phoneNumber from searchBar: " + phoneNumber);
+    //console.log(phoneNumber);
+
+
+    customerTicketsModal.style.display = "inline-block";
+
+    const customerTickets = fetchTicketsByPhoneNumber(showing, phoneNumber);
+    ticketModalText.innerText = customerTickets + "ticket(s) for " + showing.name;
+
+    //console.log("button: " + button + "\nphoneNumberInput: " + phoneNumberInput + "\ne.target: " + eTarget + "\nphoneNumber: " + phoneNumber + "\nTickets bought: " + customerTickets);
+    console.log("modal text: " + ticketModalText.innerText);
+
+    console.log("end of modal");
+}
 //close modal
 closeTicketsModalButton.addEventListener("click", ()=>{
     customerTicketsModal.style.display= "none";
