@@ -12,6 +12,7 @@ const customerTicketsModal = document.querySelector("#customer-tickets-modal");
 const closeTicketsModalButton = document.querySelector("#close-tickets-modal-button");
 const searchTicketsButtonList = [];
 
+let phoneNumber = 0;
 
 //fetch all showings
 fetch(`${url}/showing/all`)
@@ -73,7 +74,9 @@ function displayMovieText(showing) {
         //submitButton.type = "submit";
 
         //  console.log("før modalButtonListener");
+        getSearchBarInput(ticketSearchInput);
         modalButtonListener(showing, submitButton, ticketSearchInput);
+
         // console.log("efter modalButtonListenre");
     });
 
@@ -141,7 +144,6 @@ function fetchTicketsByPhoneNumber(showing, phoneNumber){
     }).catch((error) => console.log("fejl i fetchTicketsByPhoneNumber: " + error));
 }
 
-
 function getSearchBarInput(searchBarInput){
     searchBarInput.addEventListener("input", (e) => {
         const userInput = e.target.value;
@@ -155,12 +157,17 @@ ticketModalText.innerText = "Hello World!";
 
 //display modal
 function modalButtonListener(showing, button, searchBar) {
-    const phoneNumber = getSearchBarInput(searchBar);
 
-    button.addEventListener("click", displayModal(phoneNumber, showing));
+    button.addEventListener("click", () => {
+        phoneNumber = getSearchBarInput(searchBar);
+        console.log(ticketModalText.innerText);
+        displayModal(phoneNumber, showing);
+        console.log(ticketModalText.innerText);
+
+    });
 }
 
-function displayModal(phoneNumber, showing){
+function displayModal(showing){
     console.log("display modal");
     //console.log("search bar: " + searchBar);
     console.log (phoneNumber);
