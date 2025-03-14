@@ -65,7 +65,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const ticketData = { showing: {id: Number (showingId)}, phoneNumber: phoneNumber };
             console.log("Booking ticket with data:", ticketData);
-            console.log(JSON.stringify(ticketData))
 
             fetch(`${url}/ticket/book`, {
                 method: 'POST',
@@ -80,10 +79,25 @@ document.addEventListener("DOMContentLoaded", () => {
                 })
                 .then(result => {
                     console.log('Ticket booked successfully:', result);
-                })
+
+                    //seat count stuff
+                    const showingElement = event.target.closest(".showingInfo");
+
+                    if (showingElement) {
+                        // Find the <p> element containing "Seats available:"
+                        const seatsElement = Array.from(showingElement.querySelectorAll("p"))
+                            .find(p => p.textContent.includes("Seats available:"));
+
+                        if (seatsElement) {
+                            // Extract current seat count and update it
+                            const currentSeats = parseInt(seatsElement.textContent.replace("Seats available: ", "").trim());
+                            seatsElement.textContent = `Seats available: ${currentSeats - 1}`;
+                        }
+                    }
+                    })
                 .catch(error => {
                     console.error('Error booking ticket:', error);
                 });
         }
-    });
-});
+    })
+})
