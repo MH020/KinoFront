@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            const ticketData = { showing: {id: Number (showingId)}, phoneNumber: phoneNumber };
+            const ticketData = { showing: Number (showingId), phoneNumber: Number (phoneNumber) };
             console.log("Booking ticket with data:", ticketData);
 
             fetch(`${url}/ticket/book`, {
