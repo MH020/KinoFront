@@ -78,8 +78,8 @@ function displayMovieText(showing) {
 
 //add html for ticket searchbar.
 function addSearchTicketBar(showingId, htmlElement){
-    const searchBarForm = document.createElement("form");
-    searchBarForm.classList.add("search-wrapper");
+    const searchBarDiv = document.createElement("div");
+    searchBarDiv.classList.add("search-wrapper");
 
     //create label and input for search bar
     const searchBarLabel = document.createElement("label");
@@ -98,12 +98,12 @@ function addSearchTicketBar(showingId, htmlElement){
 
 
     //add label, input and button to searchBarDiv
-    searchBarForm.append(searchBarLabel);
-    searchBarForm.append(searchBarInput);
-    searchBarForm.append(searchBarButton);
+    searchBarDiv.append(searchBarLabel);
+    searchBarDiv.append(searchBarInput);
+    searchBarDiv.append(searchBarButton);
 
     //add searchbar to ShowingCard.
-    htmlElement.append(searchBarForm);
+    htmlElement.append(searchBarDiv);
 
     return searchBarInput;
 }
