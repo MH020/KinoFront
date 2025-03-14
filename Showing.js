@@ -77,14 +77,14 @@ function displayMovieText(showing) {
 
 //add html for ticket searchbar.
 function addSearchTicketBar(showingId, htmlElement){
-    const searchBarDiv = document.createElement("div");
-    searchBarDiv.classList.add("search-wrapper");
+    const searchBarForm = document.createElement("form");
+    searchBarForm.classList.add("search-wrapper");
 
     //create label and input for search bar
     const searchBarLabel = document.createElement("label");
-    searchBarLabel.for="ticket-search";
+    searchBarLabel.for=`ticket-search-${showingId}`;
     const searchBarInput = document.createElement("input");
-    searchBarInput.id = "ticket-search";
+    searchBarInput.id = `ticket-search-${showingId}`;
     searchBarInput.type = "search";
     searchBarInput.placeholder = "phonenumber...";
 
@@ -97,12 +97,12 @@ function addSearchTicketBar(showingId, htmlElement){
 
 
     //add label, input and button to searchBarDiv
-    searchBarDiv.append(searchBarLabel);
-    searchBarDiv.append(searchBarInput);
-    searchBarDiv.append(searchBarButton);
+    searchBarForm.append(searchBarLabel);
+    searchBarForm.append(searchBarInput);
+    searchBarForm.append(searchBarButton);
 
     //add searchbar to ShowingCard.
-    htmlElement.append(searchBarDiv);
+    htmlElement.append(searchBarForm);
 
     return searchBarInput;
 }
@@ -121,7 +121,9 @@ function createDateCards(showing){
 }
 
 function fetchTicketsByPhoneNumber(showing, phoneNumber){
-    fetch(`${url}/showing/${showing.id}/phoneNumber/${phoneNumber}`)
+    console.log("phoneNumber: " + phoneNumber);
+
+    fetch(`${url}/showing/${showing.id}/tickets/${phoneNumber}`)
         .then(response => {
             if (!response.ok){
                 console.log("error in fetchTicketsByPhoneNumber")
@@ -148,8 +150,8 @@ ticketModalText.innerText = "Hello World!";
 
 //display modal
 function displayModalButtonListener(showing, button) {
-    button.addEventListener("click", (e) => {
-            const phoneNumber = e.target.value;
+    button.addEventListener("click", () => {
+            const phoneNumber = document.querySelector(`#ticket-search-${showing.id}`).target.value;
             customerTicketsModal.style.display = "inline-block";
             const customerTickets = fetchTicketsByPhoneNumber(showing, phoneNumber);
             console.log(phoneNumber);
