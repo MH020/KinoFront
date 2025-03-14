@@ -69,7 +69,8 @@ function displayMovieText(showing) {
         showingListDiv.append(showingCard);
 
         const button = document.querySelector(`#search-${showing.id}-tickets-button`);
-        displayModalButtonListener(showing, button);
+        button.type = "submit";
+        modalButtonListener(showing, button);
     });
 
 
@@ -149,13 +150,23 @@ const ticketModalText = document.querySelector("#ticket-modal-text");
 ticketModalText.innerText = "Hello World!";
 
 //display modal
-function displayModalButtonListener(showing, button) {
-    button.addEventListener("click", () => {
-            const phoneNumber = document.querySelector(`#ticket-search-${showing.id}`).target.value;
+function modalButtonListener(showing, button) {
+    button.addEventListener("click", (e) => {
+            const phoneNumberInput = document.querySelector(`#ticket-search-${showing.id}`);
+            const phoneNumber = e.target.value;
+            const eTarget = e.target;
+
+        //target.value;
+            console.log("phoneNumber from searchBar: " + phoneNumber);
+            document.createElement("p"); //debug.
+
             customerTicketsModal.style.display = "inline-block";
+
             const customerTickets = fetchTicketsByPhoneNumber(showing, phoneNumber);
-            console.log(phoneNumber);
             ticketModalText.innerText = customerTickets + "ticket(s) for " + showing.name;
+
+
+            console.log("button: " + button + "\nphoneNumberInput: " + phoneNumberInput + "\ne.target: " + eTarget + "\nphoneNumber: " + phoneNumber + "\nTickets bought: " + customerTickets);
 
     });
 }
