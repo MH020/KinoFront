@@ -1,4 +1,4 @@
-const url = "http://localhost:8080";
+const url = "https://kinobackapp-exhffhcdf8ekcaa3.northeurope-01.azurewebsites.net";
 const movieButton = document.querySelector("#add-movie-button");
 
 movieButton.addEventListener("click", () => {
