@@ -90,7 +90,7 @@ function addSearchTicketBar(showingId, htmlElement){
     searchBarInput.placeholder = "phonenumber...";
 
     //create and add button to search bar.
-    const searchBarButton = document.createElement("button");
+    const searchBarButton = document.createElement("input");
     searchBarButton.id = `search-${showingId}-tickets-button`; //"search-tickets-button";
     searchBarButton.innerText = "search";
     searchBarButton.type = "submit";
@@ -134,7 +134,7 @@ function fetchTicketsByPhoneNumber(showing, phoneNumber){
         }).then(data => {
             console.log(data.value);
             return data.value;
-    });
+    }).catch((error) => console.log("fejl i fetchTicketsByPhoneNumber: " + error));
 }
 
 
@@ -152,21 +152,21 @@ ticketModalText.innerText = "Hello World!";
 //display modal
 function modalButtonListener(showing, button) {
     button.addEventListener("click", (e) => {
-            const phoneNumberInput = document.querySelector(`#ticket-search-${showing.id}`);
+           /* const phoneNumberInput = document.querySelector(`#ticket-search-${showing.id}`);
             const phoneNumber = e.target.value;
             const eTarget = e.target;
 
         //target.value;
             console.log("phoneNumber from searchBar: " + phoneNumber);
             document.createElement("p"); //debug.
-
+*/
             customerTicketsModal.style.display = "inline-block";
 
-            const customerTickets = fetchTicketsByPhoneNumber(showing, phoneNumber);
+            const customerTickets = fetchTicketsByPhoneNumber(showing, "12345678");
             ticketModalText.innerText = customerTickets + "ticket(s) for " + showing.name;
 
 
-            console.log("button: " + button + "\nphoneNumberInput: " + phoneNumberInput + "\ne.target: " + eTarget + "\nphoneNumber: " + phoneNumber + "\nTickets bought: " + customerTickets);
+            //console.log("button: " + button + "\nphoneNumberInput: " + phoneNumberInput + "\ne.target: " + eTarget + "\nphoneNumber: " + phoneNumber + "\nTickets bought: " + customerTickets);
 
     });
 }
