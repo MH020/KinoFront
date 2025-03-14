@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            const ticketData = { showing: Number (showingId), phoneNumber: Number (phoneNumber) };
+            const ticketData = { showing: {id: Number (showingId)}, phoneNumber: phoneNumber };
             console.log("Booking ticket with data:", ticketData);
             console.log(JSON.stringify(ticketData))
 
