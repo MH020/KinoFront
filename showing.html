@@ -4,21 +4,46 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Movie List</title>
-
-  <!-- Google Fonts for Styling -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Open+Sans:wght@600&display=swap">
-  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-      <div class="nav">
-          <a href="index.html">Home</a>
-          <a href="Movie.html">Movies</a>
-          <a href="Showing.html">Showings</a>
-          <button onclick="goBack()" >Back</button>
-      </div>
-      <div id="showing-list" class="content">
-      </div>
-      <script src="Showing.js"></script>
-      <script src="utils.js"></script>
+<div id="showing-list"></div>
+
+<header>
+  <!-- search showings -->
+  <div class="search-wrapper">
+    <label for="showing-search" ></label>
+    <input type="search" id="showing-search" placeholder="search showings...">
+  </div><!-- end of search shwoings. -->
+</header>
+
+<!-- showing data -->
+<h2>Date</h2>
+<div>
+  <h3> <a href="index.html">Title (link til film) </a> </h3> <!-- navigation to movie page -->
+  <p>Theatre</p>
+  <p>Time</p>
+  <p>Duration</p>
+  <p> tickets left (399/400)</p>
+
+  <!-- search tickets belonging to phonenumber -->
+  <div class="search-wrapper">
+    <label for="ticket-search" > search tickets</label>
+    <input type="search" id="ticket-search" placeholder="phonenumber...">
+    <p> search tickets</p>
+    <button id="search-tickets-button"> search</button>
+  </div> <!-- end of search tickets -->
+
+</div> <!-- end of showing card. -->
+
+<!-- modal showing tickets bought -->
+<div id="customer-tickets-modal">
+  <p> tickets bought </p>
+  <button id="close-button"> close </button>
+</div>
+
+<!-- scripts -->
+<script src="Showing.js"></script>
+<script src="Alert.js"></script>
+
 </body>
 </html>
