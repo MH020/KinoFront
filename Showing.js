@@ -63,8 +63,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            const ticketData = { showing: showingId, phoneNumber };
+            const ticketData = { showing: Number (showingId), phoneNumber: Number (phoneNumber) };
             console.log("Booking ticket with data:", ticketData);
+            console.log(JSON.stringify(ticketData))
 
             fetch(`${url}/ticket/book`, {
                 method: 'POST',
@@ -74,7 +75,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 },
                 body: JSON.stringify(ticketData)
             })
-                .then(response => response.json())
+                .then(response => {
+                    console.log(response.body)
+                })
                 .then(result => {
                     console.log('Ticket booked successfully:', result);
                 })
