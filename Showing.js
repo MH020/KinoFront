@@ -63,21 +63,9 @@ function displayMovieText(showing) {
             <p><strong>Ledige sæder:</strong> ${showing.theatre.seats}</p>`;
 
         const ticketSearchInput = addSearchTicketBar(showing.id, showingCard); //add search bar to showingCard.
-        console.log(showing.id);
-
-        //const ticketSearchInput = document.querySelector("#ticket-search-" + showing.id) ;
-        //getSearchBarInput(ticketSearchInput);
+        const submitButton = document.querySelector(`#search-${showing.id}-tickets-button`);
 
         showingListDiv.append(showingCard);
-
-        const submitButton = document.querySelector(`#search-${showing.id}-tickets-button`);
-        //submitButton.type = "submit";
-
-        //  console.log("før modalButtonListener");
-        getSearchBarInput(ticketSearchInput);
-        modalButtonListener(showing, submitButton, ticketSearchInput);
-
-        // console.log("efter modalButtonListenre");
     });
 
 
@@ -157,34 +145,15 @@ ticketModalText.innerText = "Hello World!";
 
 //display modal
 function modalButtonListener(showing, button, searchBar) {
-
     button.addEventListener("click", () => {
-        phoneNumber = getSearchBarInput(searchBar);
-        console.log(ticketModalText.innerText);
-        displayModal(phoneNumber, showing);
-        console.log(ticketModalText.innerText);
+        customerTicketsModal.style.display = "inline-block";
+        
+        const customerTickets = fetchTicketsByPhoneNumber(showing, phoneNumber);
+        ticketModalText.innerText = customerTickets + "ticket(s) for " + showing.name;
 
     });
 }
 
-function displayModal(showing){
-    console.log("display modal");
-    //console.log("search bar: " + searchBar);
-    console.log (phoneNumber);
-    console.log("phoneNumber from searchBar: " + phoneNumber);
-    //console.log(phoneNumber);
-
-
-    customerTicketsModal.style.display = "inline-block";
-
-    const customerTickets = fetchTicketsByPhoneNumber(showing, phoneNumber);
-    ticketModalText.innerText = customerTickets + "ticket(s) for " + showing.name;
-
-    //console.log("button: " + button + "\nphoneNumberInput: " + phoneNumberInput + "\ne.target: " + eTarget + "\nphoneNumber: " + phoneNumber + "\nTickets bought: " + customerTickets);
-    console.log("modal text: " + ticketModalText.innerText);
-
-    console.log("end of modal");
-}
 //close modal
 closeTicketsModalButton.addEventListener("click", ()=>{
     customerTicketsModal.style.display= "none";
