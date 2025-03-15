@@ -1,5 +1,5 @@
-//const url = "http://localhost:8080";
-const url = "https://kinobackapp-exhffhcdf8ekcaa3.northeurope-01.azurewebsites.net";
+const url = "http://localhost:8080";
+//const url = "https://kinobackapp-exhffhcdf8ekcaa3.northeurope-01.azurewebsites.net";
 
 // Fetch showings data
 fetch(`${url}/showing/all`)
@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            const ticketData = { showing: {id: Number (showingId)}, phoneNumber: phoneNumber };
+            const ticketData = { showingId: showingId, phoneNumber: phoneNumber };
             console.log("Booking ticket with data:", ticketData);
 
             fetch(`${url}/ticket/book`, {
